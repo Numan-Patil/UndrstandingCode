@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search - AI Coding Mentor Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .doc-header {
+            background-color: #252526;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .doc-section {
+            background-color: #252526;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .code-block {
+            background-color: #1e1e1e;
+            border: 1px solid #474747;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        .step {
+            background-color: #0e639c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .complexity {
+            background-color: #474747;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .visual-example {
+            background-color: #1e1e1e;
+            border: 1px solid #474747;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .array-element {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 2px;
+            background-color: #474747;
+            border-radius: 4px;
+        }
+        .highlighted {
+            background-color: #0e639c !important;
+        }
+        .target {
+            background-color: #4caf50 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="doc-header">
+            <h1><i class="fas fa-search"></i> Binary Search Algorithm</h1>
+            <p class="lead">An efficient algorithm for finding a target value in a sorted array by repeatedly dividing the search space in half.</p>
+        </div>
+
+        <div class="doc-section">
+            <h2>How It Works</h2>
+            <p>Binary search works on the principle of "divide and conquer". It repeatedly divides the sorted array in half, comparing the target value with the middle element, and eliminating half of the remaining elements.</p>
+            
+            <h3>Prerequisites:</h3>
+            <ul>
+                <li>The array must be <strong>sorted</strong> in ascending order</li>
+                <li>Random access to elements (works with arrays, not linked lists)</li>
+            </ul>
+            
+            <h3>Algorithm Steps:</h3>
+            <ol>
+                <li><span class="step">Step 1</span> Set left pointer to 0 and right pointer to array length - 1</li>
+                <li><span class="step">Step 2</span> Calculate middle index: mid = (left + right) // 2</li>
+                <li><span class="step">Step 3</span> Compare target with middle element</li>
+                <li><span class="step">Step 4</span> If target equals middle element, return the index</li>
+                <li><span class="step">Step 5</span> If target is less than middle, search left half (right = mid - 1)</li>
+                <li><span class="step">Step 6</span> If target is greater than middle, search right half (left = mid + 1)</li>
+                <li><span class="step">Step 7</span> Repeat until target is found or left > right</li>
+            </ol>
+        </div>
+
+        <div class="doc-section">
+            <h2>Visual Example</h2>
+            <p>Let's search for target value <strong>7</strong> in the array [1, 3, 5, 7, 9, 11, 13]:</p>
+            
+            <h4>Initial State:</h4>
+            <div class="visual-example">
+                <div class="array-element">1</div>
+                <div class="array-element">3</div>
+                <div class="array-element">5</div>
+                <div class="array-element target">7</div>
+                <div class="array-element">9</div>
+                <div class="array-element">11</div>
+                <div class="array-element">13</div>
+                <p>left=0, right=6, searching for 7</p>
+            </div>
+            
+            <h4>Step 1: Check middle element (index 3)</h4>
+            <div class="visual-example">
+                <div class="array-element">1</div>
+                <div class="array-element">3</div>
+                <div class="array-element">5</div>
+                <div class="array-element highlighted">7</div>
+                <div class="array-element">9</div>
+                <div class="array-element">11</div>
+                <div class="array-element">13</div>
+                <p>mid=3, arr[3]=7, target=7 → FOUND!</p>
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>Pseudocode</h2>
+            <div class="code-block">
+ALGORITHM BinarySearch(arr, target):
+    left = 0
+    right = length(arr) - 1
+    
+    WHILE left <= right:
+        mid = (left + right) // 2
+        
+        IF arr[mid] == target:
+            RETURN mid
+        ELSE IF arr[mid] < target:
+            left = mid + 1
+        ELSE:
+            right = mid - 1
+    
+    RETURN -1  // Not found
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>Recursive Implementation</h2>
+            <p>Binary search can also be implemented recursively:</p>
+            <div class="code-block">
+ALGORITHM BinarySearchRecursive(arr, target, left, right):
+    IF left > right:
+        RETURN -1
+    
+    mid = (left + right) // 2
+    
+    IF arr[mid] == target:
+        RETURN mid
+    ELSE IF arr[mid] < target:
+        RETURN BinarySearchRecursive(arr, target, mid + 1, right)
+    ELSE:
+        RETURN BinarySearchRecursive(arr, target, left, mid - 1)
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>Time & Space Complexity</h2>
+            <div class="complexity">
+                <h4>Iterative Implementation:</h4>
+                <ul>
+                    <li><strong>Time Complexity:</strong> O(log n) - eliminates half the elements each iteration</li>
+                    <li><strong>Space Complexity:</strong> O(1) - uses only a constant amount of extra space</li>
+                </ul>
+                
+                <h4>Recursive Implementation:</h4>
+                <ul>
+                    <li><strong>Time Complexity:</strong> O(log n) - same as iterative</li>
+                    <li><strong>Space Complexity:</strong> O(log n) - due to recursive call stack</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>Implementation Hints</h2>
+            <h4>Key Points to Remember:</h4>
+            <ul>
+                <li>Always check if the array is sorted before applying binary search</li>
+                <li>Use integer division for calculating mid to avoid floating-point issues</li>
+                <li>Be careful with the loop condition: use <= not just <</li>
+                <li>Update left/right pointers correctly: left = mid + 1, right = mid - 1</li>
+                <li>Handle the case when element is not found (return -1 or appropriate value)</li>
+            </ul>
+            
+            <h4>Common Mistakes:</h4>
+            <ul>
+                <li>Forgetting to check if array is sorted</li>
+                <li>Using wrong loop condition (left < right instead of left <= right)</li>
+                <li>Integer overflow in mid calculation (use mid = left + (right - left) // 2)</li>
+                <li>Incorrect pointer updates (using mid instead of mid ± 1)</li>
+                <li>Not handling edge cases (empty array, single element)</li>
+            </ul>
+        </div>
+
+        <div class="doc-section">
+            <h2>Variations and Extensions</h2>
+            <h4>Binary Search Variations:</h4>
+            <ul>
+                <li><strong>Find First Occurrence:</strong> Continue searching left even after finding target</li>
+                <li><strong>Find Last Occurrence:</strong> Continue searching right even after finding target</li>
+                <li><strong>Find Insertion Point:</strong> Return where element should be inserted</li>
+                <li><strong>Search in Rotated Array:</strong> Modified binary search for rotated sorted arrays</li>
+            </ul>
+            
+            <h4>Real-world Applications:</h4>
+            <ul>
+                <li>Database indexing and searching</li>
+                <li>Finding elements in sorted collections</li>
+                <li>Numerical methods (finding roots, optimization)</li>
+                <li>Game development (pathfinding, collision detection)</li>
+            </ul>
+        </div>
+
+        <div class="doc-section">
+            <h2>When to Use Binary Search</h2>
+            <p><strong>Good for:</strong></p>
+            <ul>
+                <li>Searching in large sorted datasets</li>
+                <li>When you need fast lookups (O(log n))</li>
+                <li>Memory-efficient searching</li>
+                <li>As a building block for more complex algorithms</li>
+            </ul>
+            
+            <p><strong>Not suitable for:</strong></p>
+            <ul>
+                <li>Unsorted data (sort first, then search)</li>
+                <li>Small datasets (linear search might be faster due to simplicity)</li>
+                <li>Linked lists (no random access)</li>
+                <li>When data changes frequently (maintaining sorted order is expensive)</li>
+            </ul>
+        </div>
+
+        <div class="doc-section">
+            <h2>Next Steps</h2>
+            <p>Now that you understand binary search, consider exploring:</p>
+            <ul>
+                <li>Ternary Search - divide array into three parts</li>
+                <li>Interpolation Search - improved binary search for uniformly distributed data</li>
+                <li>Exponential Search - for unbounded/infinite arrays</li>
+                <li>Binary Search Tree - data structure that maintains sorted order</li>
+            </ul>
+            
+            <p><strong>Ready to code?</strong> Close this window and tell the AI mentor you want to implement binary search!</p>
+        </div>
+    </div>
+</body>
+</html>

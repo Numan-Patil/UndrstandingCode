@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Library - Undrstanding AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border-color: #475569;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .library-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .library-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .library-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .topic-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .topic-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 1.5rem;
+        }
+
+        .topic-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .topic-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .topic-difficulty {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+        }
+
+        .difficulty-easy {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .difficulty-medium {
+            background: rgba(251, 146, 60, 0.2);
+            color: #fb923c;
+        }
+
+        .difficulty-hard {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .library-title {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:window.close()" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Close
+    </a>
+
+    <div class="library-header">
+        <div class="container">
+            <h1 class="library-title">
+                <i class="fas fa-book"></i>
+                Learning Library
+            </h1>
+            <p class="library-subtitle">
+                Comprehensive guides and documentation for various programming concepts. 
+                Click on any topic to explore detailed explanations and examples.
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="topic-card" onclick="window.open('/docs/bubble-sort', '_blank')">
+                    <div class="topic-icon">
+                        <i class="fas fa-sort-amount-up"></i>
+                    </div>
+                    <h3 class="topic-title">Bubble Sort</h3>
+                    <p class="topic-description">
+                        Learn the fundamentals of sorting algorithms with bubble sort. 
+                        Understand how this simple algorithm works by repeatedly stepping through the list, 
+                        comparing adjacent elements and swapping them if they're in the wrong order.
+                    </p>
+                    <span class="topic-difficulty difficulty-easy">Easy</span>
+                    <span class="topic-difficulty difficulty-easy">Beginner Friendly</span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="topic-card" onclick="window.open('/docs/quick-sort', '_blank')">
+                    <div class="topic-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="topic-title">Quick Sort</h3>
+                    <p class="topic-description">
+                        Master the quick sort algorithm with its divide-and-conquer approach. 
+                        Learn how to partition arrays around pivot elements and achieve excellent 
+                        average-case performance with O(n log n) complexity.
+                    </p>
+                    <span class="topic-difficulty difficulty-medium">Medium</span>
+                    <span class="topic-difficulty difficulty-medium">Divide & Conquer</span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="topic-card" onclick="window.open('/docs/merge-sort', '_blank')">
+                    <div class="topic-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3 class="topic-title">Merge Sort</h3>
+                    <p class="topic-description">
+                        Explore merge sort, a stable sorting algorithm with guaranteed O(n log n) performance. 
+                        Understand the divide-and-conquer strategy of splitting arrays and merging sorted halves 
+                        back together efficiently.
+                    </p>
+                    <span class="topic-difficulty difficulty-medium">Medium</span>
+                    <span class="topic-difficulty difficulty-medium">Stable Sort</span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="topic-card" onclick="window.open('/docs/binary-search', '_blank')">
+                    <div class="topic-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="topic-title">Binary Search</h3>
+                    <p class="topic-description">
+                        Master the art of efficient searching with binary search. 
+                        This powerful algorithm can find elements in sorted arrays with logarithmic time complexity, 
+                        making it essential for working with large datasets.
+                    </p>
+                    <span class="topic-difficulty difficulty-medium">Medium</span>
+                    <span class="topic-difficulty difficulty-medium">Divide & Conquer</span>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="topic-card" onclick="window.open('recursion.html', '_blank')">
+                    <div class="topic-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="topic-title">Recursion</h3>
+                    <p class="topic-description">
+                        Understand the power of recursive functions - functions that call themselves. 
+                        Learn how to break down complex problems into smaller, manageable subproblems 
+                        and solve them elegantly using recursion.
+                    </p>
+                    <span class="topic-difficulty difficulty-hard">Advanced</span>
+                    <span class="topic-difficulty difficulty-medium">Problem Solving</span>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="topic-card" style="opacity: 0.6; cursor: not-allowed;">
+                    <div class="topic-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 class="topic-title">Data Structures</h3>
+                    <p class="topic-description">
+                        Explore fundamental data structures like arrays, linked lists, stacks, and queues. 
+                        Learn when and how to use each structure effectively in your programs.
+                    </p>
+                    <span class="topic-difficulty difficulty-medium">Coming Soon</span>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="topic-card" style="opacity: 0.6; cursor: not-allowed;">
+                    <div class="topic-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="topic-title">Algorithm Complexity</h3>
+                    <p class="topic-description">
+                        Understand Big O notation and learn to analyze the time and space complexity 
+                        of your algorithms. Make informed decisions about algorithm efficiency.
+                    </p>
+                    <span class="topic-difficulty difficulty-hard">Coming Soon</span>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="topic-card" style="opacity: 0.6; cursor: not-allowed;">
+                    <div class="topic-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3 class="topic-title">Dynamic Programming</h3>
+                    <p class="topic-description">
+                        Master the technique of solving complex problems by breaking them down into 
+                        simpler subproblems and storing results to avoid redundant calculations.
+                    </p>
+                    <span class="topic-difficulty difficulty-hard">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursion - AI Coding Mentor Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .doc-header {
+            background-color: #252526;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .doc-section {
+            background-color: #252526;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .code-block {
+            background-color: #1e1e1e;
+            border: 1px solid #474747;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        .step {
+            background-color: #0e639c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .complexity {
+            background-color: #474747;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .call-stack {
+            background-color: #1e1e1e;
+            border: 1px solid #474747;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        .call-frame {
+            background-color: #474747;
+            padding: 8px;
+            margin: 4px 0;
+            border-radius: 4px;
+            border-left: 3px solid #0e639c;
+        }
+        .warning {
+            background-color: #664400;
+            border: 1px solid #ff9800;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .tip {
+            background-color: #004466;
+            border: 1px solid #0e639c;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="doc-header">
+            <h1><i class="fas fa-sync"></i> Recursion</h1>
+            <p class="lead">A programming technique where a function calls itself to solve a problem by breaking it down into smaller, similar subproblems.</p>
+        </div>
+
+        <div class="doc-section">
+            <h2>What is Recursion?</h2>
+            <p>Recursion is a method of solving problems where the solution depends on solutions to smaller instances of the same problem. A recursive function is one that calls itself during its execution.</p>
+            
+            <h3>Key Components of Recursion:</h3>
+            <ol>
+                <li><span class="step">Base Case</span> The condition that stops the recursion (prevents infinite loop)</li>
+                <li><span class="step">Recursive Case</span> The function calling itself with modified parameters</li>
+                <li><span class="step">Progress</span> Each recursive call should move closer to the base case</li>
+            </ol>
+        </div>
+
+        <div class="doc-section">
+            <h2>Simple Example: Factorial</h2>
+            <p>The factorial of a number n (written as n!) is the product of all positive integers less than or equal to n.</p>
+            
+            <h4>Mathematical Definition:</h4>
+            <div class="code-block">
+n! = n × (n-1) × (n-2) × ... × 1
+0! = 1  (by definition)
+5! = 5 × 4 × 3 × 2 × 1 = 120
+            </div>
+            
+            <h4>Recursive Definition:</h4>
+            <div class="code-block">
+factorial(n) = 1                    if n = 0 (base case)
+factorial(n) = n × factorial(n-1)   if n > 0 (recursive case)
+            </div>
+            
+            <h4>Pseudocode:</h4>
+            <div class="code-block">
+FUNCTION factorial(n):
+    IF n == 0:
+        RETURN 1          // Base case
+    ELSE:
+        RETURN n * factorial(n-1)  // Recursive case
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>Call Stack Visualization</h2>
+            <p>Let's trace through factorial(4) to see how recursion works:</p>
+            
+            <div class="call-stack">
+                <div class="call-frame">factorial(4) → 4 * factorial(3)</div>
+                <div class="call-frame">factorial(3) → 3 * factorial(2)</div>
+                <div class="call-frame">factorial(2) → 2 * factorial(1)</div>
+                <div class="call-frame">factorial(1) → 1 * factorial(0)</div>
+                <div class="call-frame">factorial(0) → 1 (base case reached!)</div>
+            </div>
+            
+            <h4>Return Journey:</h4>
+            <div class="call-stack">
+                <div class="call-frame">factorial(0) returns 1</div>
+                <div class="call-frame">factorial(1) returns 1 * 1 = 1</div>
+                <div class="call-frame">factorial(2) returns 2 * 1 = 2</div>
+                <div class="call-frame">factorial(3) returns 3 * 2 = 6</div>
+                <div class="call-frame">factorial(4) returns 4 * 6 = 24</div>
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>More Examples</h2>
+            
+            <h4>Fibonacci Sequence:</h4>
+            <div class="code-block">
+FUNCTION fibonacci(n):
+    IF n <= 1:
+        RETURN n          // Base cases: fib(0)=0, fib(1)=1
+    ELSE:
+        RETURN fibonacci(n-1) + fibonacci(n-2)  // Recursive case
+            </div>
+            
+            <h4>Sum of Natural Numbers:</h4>
+            <div class="code-block">
+FUNCTION sum_natural(n):
+    IF n == 1:
+        RETURN 1          // Base case
+    ELSE:
+        RETURN n + sum_natural(n-1)  // Recursive case
+            </div>
+            
+            <h4>Power Function:</h4>
+            <div class="code-block">
+FUNCTION power(base, exponent):
+    IF exponent == 0:
+        RETURN 1          // Base case: any number^0 = 1
+    ELSE:
+        RETURN base * power(base, exponent-1)  // Recursive case
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>Types of Recursion</h2>
+            
+            <h4>1. Linear Recursion:</h4>
+            <p>Function makes only one recursive call to itself.</p>
+            <div class="code-block">
+// Example: factorial, sum of natural numbers
+factorial(n) → factorial(n-1)
+            </div>
+            
+            <h4>2. Binary Recursion:</h4>
+            <p>Function makes two recursive calls to itself.</p>
+            <div class="code-block">
+// Example: Fibonacci, binary tree traversal
+fibonacci(n) → fibonacci(n-1) + fibonacci(n-2)
+            </div>
+            
+            <h4>3. Tail Recursion:</h4>
+            <p>Recursive call is the last operation in the function.</p>
+            <div class="code-block">
+FUNCTION factorial_tail(n, accumulator):
+    IF n == 0:
+        RETURN accumulator
+    ELSE:
+        RETURN factorial_tail(n-1, n * accumulator)
+            </div>
+            
+            <h4>4. Mutual Recursion:</h4>
+            <p>Two or more functions call each other recursively.</p>
+            <div class="code-block">
+FUNCTION is_even(n):
+    IF n == 0: RETURN True
+    ELSE: RETURN is_odd(n-1)
+
+FUNCTION is_odd(n):
+    IF n == 0: RETURN False
+    ELSE: RETURN is_even(n-1)
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>Time & Space Complexity</h2>
+            <div class="complexity">
+                <h4>Time Complexity:</h4>
+                <ul>
+                    <li><strong>Linear Recursion:</strong> O(n) - like factorial</li>
+                    <li><strong>Binary Recursion:</strong> O(2^n) - like naive fibonacci</li>
+                    <li><strong>Tail Recursion:</strong> O(n) - but can be optimized to O(1)</li>
+                </ul>
+                
+                <h4>Space Complexity:</h4>
+                <ul>
+                    <li><strong>Generally O(n)</strong> due to call stack</li>
+                    <li><strong>Tail Recursion:</strong> Can be O(1) with optimization</li>
+                    <li><strong>Maximum depth:</strong> Limited by stack size</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>Common Pitfalls</h2>
+            
+            <div class="warning">
+                <h4><i class="fas fa-exclamation-triangle"></i> Stack Overflow</h4>
+                <p>Occurs when recursion depth exceeds the system's call stack limit.</p>
+                <div class="code-block">
+// Dangerous: Missing base case
+FUNCTION infinite_recursion(n):
+    RETURN infinite_recursion(n-1)  // Will crash!
+                </div>
+            </div>
+            
+            <div class="warning">
+                <h4><i class="fas fa-exclamation-triangle"></i> Inefficient Recursion</h4>
+                <p>Some recursive solutions recalculate the same values multiple times.</p>
+                <div class="code-block">
+// Inefficient: fibonacci(5) calculates fibonacci(3) multiple times
+fibonacci(5) → fibonacci(4) + fibonacci(3)
+fibonacci(4) → fibonacci(3) + fibonacci(2)
+// fibonacci(3) is calculated twice!
+                </div>
+            </div>
+            
+            <h4>Common Mistakes:</h4>
+            <ul>
+                <li>Forgetting the base case</li>
+                <li>Base case never being reached</li>
+                <li>Not making progress toward base case</li>
+                <li>Inefficient recursive solutions</li>
+                <li>Using recursion when iteration would be better</li>
+            </ul>
+        </div>
+
+        <div class="doc-section">
+            <h2>Recursion vs Iteration</h2>
+            
+            <h4>Recursion Advantages:</h4>
+            <ul>
+                <li>More natural for problems with recursive structure</li>
+                <li>Code is often cleaner and easier to understand</li>
+                <li>Directly follows mathematical definitions</li>
+                <li>Good for tree/graph traversal</li>
+            </ul>
+            
+            <h4>Iteration Advantages:</h4>
+            <ul>
+                <li>More memory efficient (no call stack)</li>
+                <li>Faster execution (no function call overhead)</li>
+                <li>No risk of stack overflow</li>
+                <li>Easier to optimize</li>
+            </ul>
+            
+            <div class="tip">
+                <h4><i class="fas fa-lightbulb"></i> When to Use Recursion</h4>
+                <p>Use recursion when:</p>
+                <ul>
+                    <li>The problem has a recursive structure (trees, fractals)</li>
+                    <li>Divide-and-conquer approach is natural</li>
+                    <li>Code clarity is more important than performance</li>
+                    <li>Working with recursive data structures</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>Advanced Concepts</h2>
+            
+            <h4>Memoization:</h4>
+            <p>Technique to optimize recursive functions by caching results.</p>
+            <div class="code-block">
+memo = {}
+FUNCTION fibonacci_memo(n):
+    IF n in memo:
+        RETURN memo[n]
+    
+    IF n <= 1:
+        result = n
+    ELSE:
+        result = fibonacci_memo(n-1) + fibonacci_memo(n-2)
+    
+    memo[n] = result
+    RETURN result
+            </div>
+            
+            <h4>Dynamic Programming:</h4>
+            <p>Bottom-up approach that builds solutions from smaller subproblems.</p>
+            <div class="code-block">
+FUNCTION fibonacci_dp(n):
+    IF n <= 1: RETURN n
+    
+    dp = [0, 1]
+    FOR i = 2 to n:
+        dp[i] = dp[i-1] + dp[i-2]
+    
+    RETURN dp[n]
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>Practice Problems</h2>
+            <p>Try implementing these recursive solutions:</p>
+            <ol>
+                <li><strong>Greatest Common Divisor (GCD)</strong> - using Euclidean algorithm</li>
+                <li><strong>Binary Tree Traversal</strong> - inorder, preorder, postorder</li>
+                <li><strong>Tower of Hanoi</strong> - classic recursive puzzle</li>
+                <li><strong>Palindrome Check</strong> - check if string reads same forwards/backwards</li>
+                <li><strong>Quick Sort</strong> - divide-and-conquer sorting algorithm</li>
+                <li><strong>Merge Sort</strong> - another divide-and-conquer sorting algorithm</li>
+            </ol>
+        </div>
+
+        <div class="doc-section">
+            <h2>Next Steps</h2>
+            <p>Now that you understand recursion, consider exploring:</p>
+            <ul>
+                <li>Dynamic Programming - optimizing recursive solutions</li>
+                <li>Backtracking - recursive algorithm for constraint satisfaction</li>
+                <li>Divide and Conquer - recursive problem-solving paradigm</li>
+                <li>Tree and Graph Algorithms - heavily use recursion</li>
+            </ul>
+            
+            <p><strong>Ready to code?</strong> Close this window and tell the AI mentor you want to implement a recursive solution!</p>
+        </div>
+    </div>
+</body>
+</html>

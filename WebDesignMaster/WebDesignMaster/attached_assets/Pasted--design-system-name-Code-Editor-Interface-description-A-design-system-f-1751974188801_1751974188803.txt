@@ -1,0 +1,110 @@
+{
+  "design_system": {
+    "name": "Code Editor Interface",
+    "description": "A design system for replicating code editor interfaces with file explorers, code displays, and terminal outputs.",
+    "structure": {
+      "layout": {
+        "primary_panels": [
+          {
+            "name": "Explorer",
+            "position": "left",
+            "style": "tree-view",
+            "content_type": "file_list",
+            "icon_style": "minimal",
+            "item_spacing": "compact"
+          },
+          {
+            "name": "Code Display",
+            "position": "center",
+            "style": "tabbed",
+            "syntax_highlighting": true,
+            "line_numbers": true
+          },
+          {
+            "name": "Bottom Panel",
+            "position": "bottom",
+            "components": [
+              {
+                "name": "Problems",
+                "style": "table"
+              },
+              {
+                "name": "Output",
+                "style": "monospace"
+              },
+              {
+                "name": "Terminal",
+                "style": "command-line"
+              },
+              {
+                "name": "Debug Console",
+                "style": "log-output"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "visual_style": {
+      "color_palette": {
+        "primary": "#1e1e1e",
+        "secondary": "#252526",
+        "accent": "#0e639c",
+        "text": {
+          "primary": "#d4d4d4",
+          "secondary": "#858585",
+          "code": {
+            "keyword": "#569cd6",
+            "function": "#dcdcaa",
+            "string": "#ce9178",
+            "number": "#b5cea8"
+          }
+        }
+      },
+      "typography": {
+        "font_family": "Consolas, 'Courier New', monospace",
+        "font_size": {
+          "primary": "13px",
+          "secondary": "12px",
+          "header": "15px"
+        },
+        "line_height": "1.5"
+      },
+      "borders": {
+        "panel_divider": "1px solid #474747",
+        "item_selection": "1px solid #094771"
+      },
+      "spacing": {
+        "panel_padding": "8px",
+        "item_padding": "4px 8px"
+      }
+    },
+    "interactive_elements": {
+      "tabs": {
+        "style": "top-aligned",
+        "active_indicator": "underline",
+        "close_button": true
+      },
+      "status_bar": {
+        "position": "bottom",
+        "items": [
+          "language_mode",
+          "line_count",
+          "cursor_position"
+        ]
+      }
+    },
+    "error_handling": {
+      "visual_cues": {
+        "error_bars": true,
+        "squiggly_underline": true,
+        "color": "#f14c4c"
+      }
+    },
+    "metadata": {
+      "recommended_use": "Code editors, IDEs, developer tools",
+      "adaptability": "Supports multiple programming languages",
+      "icon_style": "outline"
+    }
+  }
+}

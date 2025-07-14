@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undrstanding AI - Your True AI Companion</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-dark.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="editor-container">
+        <!-- Left Panel - File Explorer -->
+        <div class="explorer-panel">
+            <div class="explorer-header">
+                <span class="panel-title">Explorer</span>
+                <button class="sidebar-close-btn" id="sidebarClose" title="Close Sidebar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="explorer-actions">
+                <button class="action-btn" id="createFileBtn" title="New File" aria-label="New File">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="action-btn" id="searchExpandedBtn" title="Search & Replace" aria-label="Search & Replace">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="action-btn" id="createFolderBtn" title="New Folder" aria-label="New Folder">
+                    <i class="fas fa-folder-plus"></i>
+                </button>
+                <button class="action-btn" id="uploadFileBtn" title="Upload File" aria-label="Upload File">
+                    <i class="fas fa-upload"></i>
+                </button>
+                <button class="action-btn" id="uploadFolderBtn" title="Upload Folder" aria-label="Upload Folder">
+                    <i class="fas fa-folder-open"></i>
+                </button>
+                <button class="action-btn" title="Refresh" aria-label="Refresh">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+
+            <!-- Collapsed Sidebar Content -->
+            <div class="collapsed-sidebar-content">
+                <div class="collapsed-icon" title="Files">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <div class="collapsed-icon" title="Search">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="collapsed-icon" id="collapsedQuestionsBtn" title="Programming Questions">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <button class="collapsed-library-btn" id="collapsedLibraryBtn" title="Learning Library">
+                    <i class="fas fa-book"></i>
+                </button>
+            </div>
+
+            <div class="file-tree">
+                <div class="folder-item expanded">
+                    <div class="folder-header">
+                        <i class="fas fa-chevron-down folder-arrow"></i>
+                        <i class="fas fa-folder-open folder-icon"></i>
+                        <span class="folder-name">my-project</span>
+                        <button class="folder-menu-btn" title="More options">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    <div class="folder-content">
+                        <div class="file-item active" data-file="main.py">
+                            <i class="fab fa-python file-icon"></i>
+                            <span class="file-name">main.py</span>
+                            <button class="file-menu-btn" title="More options">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        <div class="file-item" data-file="utils.py">
+                            <i class="fab fa-python file-icon"></i>
+                            <span class="file-name">utils.py</span>
+                            <button class="file-menu-btn" title="More options">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        <div class="file-item" data-file="index.html">
+                            <i class="fab fa-html5 file-icon"></i>
+                            <span class="file-name">index.html</span>
+                            <button class="file-menu-btn" title="More options">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        <div class="file-item" data-file="styles.css">
+                            <i class="fab fa-css3 file-icon"></i>
+                            <span class="file-name">styles.css</span>
+                            <button class="file-menu-btn" title="More options">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        <div class="file-item" data-file="data_analysis.py">
+                            <i class="fab fa-python file-icon"></i>
+                            <span class="file-name">data_analysis.py</span>
+                            <button class="file-menu-btn" title="More options">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        <div class="file-item" data-file="README.md">
+                            <i class="fab fa-markdown file-icon"></i>
+                            <span class="file-name">README.md</span>
+                            <button class="file-menu-btn" title="More options">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        <div class="file-item" data-file="requirements.txt">
+                            <i class="fas fa-file-alt file-icon"></i>
+                            <span class="file-name">requirements.txt</span>
+                            <button class="file-menu-btn" title="More options">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Library Button -->
+            <div class="explorer-library">
+                <button class="library-btn" id="libraryBtn" title="Open Learning Library">
+                    <i class="fas fa-book"></i>
+                    <span>Learning Library</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <div class="tab active" data-file="main.py">
+                    <i class="fab fa-python tab-icon"></i>
+                    <span class="tab-name">main.py</span>
+                    <button class="tab-close" aria-label="Close tab">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Code Editor Area -->
+            <div class="editor-area">
+                <div class="editor-content active" data-file="main.py">
+                    <!-- File Header Bar -->
+                    <div class="file-header-bar">
+                        <div class="file-header-left">
+                            <i class="fab fa-python file-header-icon"></i>
+                            <input type="text" class="file-header-input" value="main.py" readonly>
+                        </div>
+                        <div class="file-header-right">
+                            <button class="file-header-btn" id="editHeaderBtn" title="Edit heading">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="file-header-btn" id="saveHeaderBtn" title="Save heading" style="display: none;">
+                                <i class="fas fa-save"></i>
+                            </button>
+                            <button class="file-header-btn" title="File info">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="code-editor">
+                        <div class="line-numbers" id="lineNumbers"></div>
+                        <div class="code-input-container">
+                            <textarea 
+                                id="codeInput" 
+                                class="code-input"
+                                placeholder="# Welcome to Undrstanding AI
+# Write your Python code here and I'll guide you through the learning process.
+
+import numpy as np
+import pandas as pd
+
+def analyze_data(data):
+    '''
+    Analyze the given dataset and return insights
+    '''
+    # Your implementation here
+    pass
+
+def main():
+    print('Hello, Undrstanding AI!')
+    # Start your coding journey here
+
+if __name__ == '__main__':
+    main()"
+                                spellcheck="false"
+                                aria-label="Code editor"
+                            ></textarea>
+                            <button class="back-to-top" id="backToTop" title="Back to top">
+                                <i class="fas fa-arrow-up"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terminal Area -->
+            <div class="terminal-area">
+                <div class="terminal-resize-handle"></div>
+                <div class="terminal-header">
+                    <div class="terminal-tabs">
+                        <button class="terminal-tab active" data-tab="terminal">
+                            <i class="fas fa-terminal"></i>
+                            Terminal
+                        </button>
+                        <button class="terminal-tab" data-tab="test-cases" id="testCasesTab" style="display: none;">
+                            <i class="fas fa-check-circle"></i>
+                            Test Cases
+                        </button>
+                        <button class="terminal-tab" data-tab="visualize" id="visualizeTab">
+                            <i class="fas fa-chart-bar"></i>
+                            Visualize
+                        </button>
+                    </div>
+                    <div style="display: flex; gap: 4px;">
+                        <button class="terminal-collapse" id="collapseTerminal" title="Collapse Terminal">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <button class="terminal-clear" id="clearTerminal" title="Clear Terminal">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="terminal-views">
+                    <div class="terminal-view active" data-view="terminal">
+                        <div class="terminal-content" id="terminalContent">
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$</span>
+                                <span class="terminal-text">Ready to execute your code...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="terminal-view" data-view="test-cases">
+                        <div class="test-cases-container" id="testCasesContainer">
+                            <div class="test-cases-header">
+                                <h4>Test Cases</h4>
+                                <div class="test-cases-controls">
+                                    <button class="test-btn primary" id="runAllTestsBtn">
+                                        <i class="fas fa-play"></i>
+                                        Run All Tests
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="test-cases-list" id="testCasesList">
+                                <div class="no-tests">
+                                    <i class="fas fa-vial"></i>
+                                    <p>No test cases available</p>
+                                </div>
+                            </div>
+                            <div class="test-case-details" id="testCaseDetails" style="display: none;">
+                                <div class="test-details-header">
+                                    <h5 id="testDetailsTitle">Test Case Details</h5>
+                                    <button class="test-close-btn" id="closeTestDetails">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="test-details-content">
+                                    <div class="test-detail-section">
+                                        <h6>Input:</h6>
+                                        <div class="test-detail-box" id="testInput"></div>
+                                    </div>
+                                    <div class="test-detail-section">
+                                        <h6>Expected Output:</h6>
+                                        <div class="test-detail-box" id="testExpected"></div>
+                                    </div>
+                                    <div class="test-detail-section">
+                                        <h6>Actual Output:</h6>
+                                        <div class="test-detail-box" id="testActual"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="terminal-view" data-view="visualize" id="visualizationPanel">
+                        <div class="visualization-header">
+                            <h4>Algorithm Visualization</h4>
+                            <div class="visualization-controls">
+                                <button class="viz-btn" id="walkthroughBtn" title="Step-by-step Code Walkthrough">
+                                    <i class="fas fa-shoe-prints"></i>
+                                    Walkthrough
+                                </button>
+                                <button class="viz-btn" id="visualizeBtn" title="Generate Visualization">
+                                    <i class="fas fa-chart-bar"></i>
+                                    Visualize
+                                </button>
+                            </div>
+                        </div>
+                        <div class="visualization-container" id="visualizationContainer">
+                            <div class="visualization-placeholder" id="visualizationPlaceholder">
+                                <div class="visualization-empty-state">
+                                    <div class="empty-state-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <h3>No visualization</h3>
+                                    <p>Write code to generate visualizations</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar - AI Assistant -->
+        <div class="ai-sidebar">
+            <div class="ai-sidebar-resize-handle"></div>
+            <div class="ai-sidebar-header">
+                <div class="ai-avatar">
+                    <div class="avatar-circle">
+                        <!-- Logo will be handled via CSS background -->
+                    </div>
+                </div>
+                <div class="ai-info">
+                    <h3 class="ai-name">Undrstanding AI</h3>
+                    <p class="ai-status">Ready to guide your learning</p>
+                </div>
+                <div class="ai-actions">
+                    <button class="action-btn primary" id="analyzeCode" title="AI Code Analysis">
+                        <i class="fas fa-search"></i>
+                        <span>Analyze</span>
+                    </button>
+                    <button class="action-btn secondary" id="runCode" title="Run Code">
+                        <i class="fas fa-play"></i>
+                        <span>Run</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <div class="messages-area" id="messagesArea">
+                    <div class="message assistant-message">
+                        <div class="message-avatar">
+                            <div class="avatar-mini assistant-avatar"></div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-bubble">
+                                <div class="message-header">
+                                    <span class="message-sender">Undrstanding AI</span>
+                                    <span class="message-time">now</span>
+                                </div>
+                                <div class="message-text">
+                                    <div class="message-status-header info">💬 Welcome!</div>
+                                    <div class="message-description">I'm here to guide you through your coding journey with step-by-step assistance. I won't give you direct solutions, but I'll help you understand concepts and solve problems on your own.<br><br>What would you like to learn or work on today?</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                <div class="chat-input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="chatInput" 
+                            class="chat-input"
+                            placeholder="Ask me anything about coding..."
+                            rows="1"
+                            autocomplete="off"
+                            aria-label="Chat input"
+                        ></textarea>
+                        <button id="voiceBtn" class="voice-btn" aria-label="Voice to text" title="Voice to text">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button id="sendMessage" class="send-btn" aria-label="Send message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Hidden file inputs for uploads -->
+    <input type="file" id="fileUploadInput" style="display: none;" multiple accept=".txt,.py,.js,.html,.htm,.css,.json,.md,.cpp,.c,.java,.php,.xml,.sql,.sh,.yml,.yaml,.ts,.tsx,.jsx,.scss,.sass,.less,.jpg,.jpeg,.png,.gif,.bmp,.webp,.svg,.ico">
+    <input type="file" id="folderUploadInput" style="display: none;" webkitdirectory directory multiple>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
